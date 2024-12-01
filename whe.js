@@ -14,13 +14,22 @@ async function fetchData(){
     try {
         const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=3fea617f5595e1f07694c29f83a62680`)
         const data=await res.json();
-        console.log(data);
+        
         let mtemp=(data.main.temp-273.15).toFixed(2);;
         let ftemp=(data.main.feels_like-273.15).toFixed(2);
         let mxtemp=(data.main.temp_max-273.15).toFixed(2);
         let mntemp=(data.main.temp_min-273.15).toFixed(2)
+        let wea=(data.weather[0].main)
+        console.log(wea);
         
-        
+        if (wea=="Clouds"){
+          document.getElementsByTagName("body")[0].style.backgroundImage = "url('./img/wallpaperflare.com_wallpaper.jpg')";
+
+        }else if(wea=="Rain"){
+          document.getElementsByTagName("body")[0].style.backgroundImage = "url('./img/pexels-chetanvlad-1529360.jpg')";
+        } else{
+          document.getElementsByTagName("body")[0].style.backgroundImage = "url('./img/darren-bockman-pN3Z2usSIQw-unsplash.jpg')";
+        }
         
         weather=[...data.weather]
         str=``
